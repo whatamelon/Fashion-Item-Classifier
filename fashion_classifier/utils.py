@@ -2,6 +2,8 @@
 Utility functions and constants for the Fashion Item Classifier.
 """
 
+import matplotlib
+matplotlib.use('Agg')  # Use non-interactive backend for terminal environments
 import matplotlib.pyplot as plt
 import seaborn as sns
 from sklearn.metrics import confusion_matrix, classification_report
@@ -20,7 +22,7 @@ LABEL_MAP = {
     9: "Ankle boot"
 }
 
-def plot_confusion_matrix(y_true, y_pred, title="Confusion Matrix"):
+def plot_confusion_matrix(y_true, y_pred, title="Confusion Matrix", save_path="confusion_matrix.png"):
     """
     Plot confusion matrix with seaborn.
     
@@ -28,6 +30,7 @@ def plot_confusion_matrix(y_true, y_pred, title="Confusion Matrix"):
         y_true: True labels
         y_pred: Predicted labels
         title: Plot title
+        save_path: Path to save the plot
     """
     cm = confusion_matrix(y_true, y_pred)
     plt.figure(figsize=(10, 8))
@@ -35,9 +38,12 @@ def plot_confusion_matrix(y_true, y_pred, title="Confusion Matrix"):
     plt.title(title)
     plt.xlabel('Predicted')
     plt.ylabel('Actual')
-    plt.show()
+    plt.tight_layout()
+    plt.savefig(save_path, dpi=300, bbox_inches='tight')
+    plt.close()
+    print(f"Confusion matrix saved to {save_path}")
 
-def plot_predictions(images, y_true, y_pred, num_samples=10):
+def plot_predictions(images, y_true, y_pred, num_samples=10, save_path="predictions.png"):
     """
     Plot sample predictions with actual and predicted labels.
     
@@ -46,6 +52,7 @@ def plot_predictions(images, y_true, y_pred, num_samples=10):
         y_true: True labels
         y_pred: Predicted labels
         num_samples: Number of samples to plot
+        save_path: Path to save the plot
     """
     plt.figure(figsize=(12, 6))
     for i in range(min(num_samples, len(images))):
@@ -54,7 +61,9 @@ def plot_predictions(images, y_true, y_pred, num_samples=10):
         plt.title(f"True: {LABEL_MAP[y_true[i]]}\nPred: {LABEL_MAP[y_pred[i]]}")
         plt.axis('off')
     plt.tight_layout()
-    plt.show()
+    plt.savefig(save_path, dpi=300, bbox_inches='tight')
+    plt.close()
+    print(f"Predictions plot saved to {save_path}")
 
 def print_classification_report(y_true, y_pred):
     """

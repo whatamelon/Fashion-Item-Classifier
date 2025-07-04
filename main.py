@@ -8,6 +8,10 @@ a neural network classifier on the Fashion MNIST dataset.
 
 import os
 import sys
+import numpy as np
+import matplotlib
+matplotlib.use('Agg')  # Use non-interactive backend for terminal environments
+
 from fashion_classifier import FashionClassifier, DataLoader
 from fashion_classifier.utils import (
     plot_confusion_matrix, 
@@ -78,21 +82,21 @@ def main():
         
         # Get predictions for visualization
         y_pred = results['predictions']
-        y_true = [i for i in range(len(y_test))]  # Convert back to class indices
+        y_true = np.argmax(y_test, axis=1)  # Convert back to class indices
         
         # Plot confusion matrix
         print("\n5. Generating visualizations...")
-        plot_confusion_matrix(y_true, y_pred)
+        plot_confusion_matrix(y_true, y_pred, save_path="confusion_matrix.png")
         
         # Plot sample predictions
-        plot_predictions(X_test_images, y_true, y_pred, num_samples=10)
+        plot_predictions(X_test_images, y_true, y_pred, num_samples=10, save_path="predictions.png")
         
         # Print detailed classification report
         print_classification_report(y_true, y_pred)
         
         # Save the model
         print("\n6. Saving the trained model...")
-        model_path = "fashion_classifier_model"
+        model_path = "fashion_classifier_model.keras"
         classifier.save_model(model_path)
         
         print("\n" + "=" * 60)
