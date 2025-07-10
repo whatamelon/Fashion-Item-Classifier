@@ -20,7 +20,7 @@ class FashionClassifier:
         
         Args:
             input_shape: Shape of input data (default: 784 for flattened 28x28 images)
-            num_classes: Number of output classes (default: 10 for Fashion MNIST)
+            num_classes: Number of output classes (default: 32 for Fashion MNIST)
         """
         self.input_shape = input_shape
         self.num_classes = num_classes
@@ -64,7 +64,7 @@ class FashionClassifier:
         self.model.summary()
         
     def train(self, X_train, y_train, X_val=None, y_val=None, 
-              epochs=10, batch_size=128, validation_split=0.1,
+              epochs=32, batch_size=128, validation_split=0.1,
               callbacks=None):
         """
         Train the model.

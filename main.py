@@ -32,7 +32,8 @@ def main():
     data_loader = DataLoader()
     
     # Check if data file exists
-    data_file = "fashion-mnist_test.csv"
+    # 파일은 여기서
+    data_file = "fashion-mnist_test_sample.csv"
     if not os.path.exists(data_file):
         print(f"Error: Data file '{data_file}' not found.")
         print("Please ensure the Fashion MNIST CSV file is in the current directory.")
@@ -57,14 +58,14 @@ def main():
         
         # Initialize and build model
         print("\n2. Building neural network model...")
-        classifier = FashionClassifier(input_shape=(784,), num_classes=10)
+        classifier = FashionClassifier(input_shape=(784,), num_classes=32)
         classifier.build_model(hidden_layers=[128, 64], activation='relu')
         
         # Train the model
         print("\n3. Training the model...")
         classifier.train(
             X_train, y_train,
-            epochs=10,
+            epochs=32,
             batch_size=128,
             validation_split=0.1
         )

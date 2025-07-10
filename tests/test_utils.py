@@ -16,8 +16,8 @@ class TestUtils:
             "T-shirt/top", "Trouser", "Pullover", "Dress", "Coat",
             "Sandal", "Shirt", "Sneaker", "Bag", "Ankle boot"
         ]
-        
-        assert len(LABEL_MAP) == 10
+
+        assert len(LABEL_MAP) == 32
         for i, label in enumerate(expected_labels):
             assert LABEL_MAP[i] == label
     
@@ -29,7 +29,7 @@ class TestUtils:
     
     def test_get_label_name_invalid(self):
         """Test get_label_name with invalid label IDs."""
-        assert get_label_name(10) == "Unknown (10)"
+        assert get_label_name(32) == "Unknown (32)"
         assert get_label_name(-1) == "Unknown (-1)"
         assert get_label_name(100) == "Unknown (100)"
     

@@ -76,7 +76,7 @@ The neural network consists of:
 
 ## 📊 Dataset
 
-The project uses the **Fashion MNIST** dataset with 10 clothing categories:
+The project uses the **Fashion MNIST** dataset with 32 clothing categories:
 
 | Label | Description |
 | ----- | ----------- |
@@ -121,7 +121,7 @@ X_test, y_test = data_loader.get_test_data()
 # Build and train model
 classifier = FashionClassifier()
 classifier.build_model(hidden_layers=[128, 64])
-classifier.train(X_train, y_train, epochs=10)
+classifier.train(X_train, y_train, epochs=32)
 
 # Evaluate model
 results = classifier.evaluate(X_test, y_test)
@@ -220,4 +220,5 @@ If you encounter any issues or have questions, please:
 ---
 
 **Happy classifying! 🎉**
+
 # Fashion-Item-Classifier

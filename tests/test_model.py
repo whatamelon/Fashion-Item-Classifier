@@ -12,9 +12,9 @@ class TestFashionClassifier:
     
     def test_initialization(self):
         """Test model initialization."""
-        classifier = FashionClassifier(input_shape=(784,), num_classes=10)
+        classifier = FashionClassifier(input_shape=(784,), num_classes=32)
         assert classifier.input_shape == (784,)
-        assert classifier.num_classes == 10
+        assert classifier.num_classes == 32
         assert classifier.model is None
         assert classifier.history is None
     
@@ -29,7 +29,7 @@ class TestFashionClassifier:
         # Check layer configurations
         assert classifier.model.layers[0].units == 64
         assert classifier.model.layers[1].units == 32
-        assert classifier.model.layers[2].units == 10
+        assert classifier.model.layers[2].units == 32
     
     def test_build_model_with_dropout(self):
         """Test model building with dropout."""
@@ -45,7 +45,7 @@ class TestFashionClassifier:
         classifier = FashionClassifier()
         classifier.build_model()
         
-        X_test = np.random.random((10, 784))
+        X_test = np.random.random((32, 784))
         
         with pytest.raises(ValueError, match="Model not trained"):
             classifier.predict(X_test)
@@ -55,8 +55,8 @@ class TestFashionClassifier:
         classifier = FashionClassifier()
         classifier.build_model()
         
-        X_test = np.random.random((10, 784))
-        y_test = np.random.random((10, 10))
+        X_test = np.random.random((32, 784))
+        y_test = np.random.random((32, 32))
         
         with pytest.raises(ValueError, match="Model not trained"):
             classifier.evaluate(X_test, y_test)
